@@ -2,6 +2,7 @@
 import argparse
 from reddit_scraper import extract_username_from_url, get_user_data
 from gemini_analyzer import get_gemini_persona
+from pdf_generator import save_persona_as_pdf
 import json
 import os
 
@@ -31,3 +32,6 @@ if __name__ == "__main__":
         f.write(persona_text)
 
     print(f"[✓] Persona saved to {persona_path}")
+
+    # Save PDF version
+    save_persona_as_pdf(username, f"output/{username}_persona.txt")
