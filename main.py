@@ -1,6 +1,7 @@
 # main.py
 import argparse
 from reddit_scraper import extract_username_from_url, get_user_data
+from gemini_analyzer import get_gemini_persona
 import json
 import os
 
@@ -20,3 +21,13 @@ if __name__ == "__main__":
     print(f"[~] Fetching data for user: {username}")
     user_data = get_user_data(username)
     save_raw_data(user_data)
+
+    print(f"[~] Generating persona using Gemini...")
+    persona_text = get_gemini_persona(user_data)
+
+    # Save persona text
+    persona_path = f"output/{username}_persona.txt"
+    with open(persona_path, "w", encoding="utf-8") as f:
+        f.write(persona_text)
+
+    print(f"[✓] Persona saved to {persona_path}")
